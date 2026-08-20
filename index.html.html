@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поздравление для мамы</title>
+    <style>
+        /* ---------- Глобальные сбросы и фон ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            min-height: 100vh;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce4ec;
+            background-image: url('для мамы/лилия фон главной страницы.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* ---------- Угловые украшения (края) ---------- */
+        .corner-decoration {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            background: url('для мамы/края.png') no-repeat center center;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .corner-decoration.top-left {
+            top: 10px;
+            left: 10px;
+        }
+        .corner-decoration.top-right {
+            top: 10px;
+            right: 10px;
+            transform: scaleX(-1);
+        }
+        .corner-decoration.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            transform: scaleY(-1);
+        }
+        .corner-decoration.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            transform: scale(-1, -1);
+        }
+
+        /* ---------- Виджеты (кнопки) в одну полоску ---------- */
+        .widgets {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 0 30px 0;
+            max-width: 100%;
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .widget-button {
+            background: rgba(255, 240, 245, 0.85);
+            border: 2px solid #b57a8f;
+            border-radius: 40px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5a2d3c;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+            backdrop-filter: blur(2px);
+            text-align: center;
+            white-space: nowrap;
+            flex: 0 0 auto;
+        }
+        .widget-button:hover {
+            background: rgba(255, 220, 230, 0.95);
+            transform: scale(1.05);
+            border-color: #a05070;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+        }
+        .widget-button:active {
+            transform: scale(0.97);
+        }
+        .widget-button.home-btn {
+            background: rgba(200, 160, 180, 0.9);
+            border-color: #7a4a5a;
+            color: #fff;
+            font-weight: 700;
+        }
+        .widget-button.home-btn:hover {
+            background: rgba(180, 130, 155, 0.95);
+            border-color: #5a2d3c;
+        }
+
+        /* ---------- Контейнер контента ---------- */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            position: relative;
+            flex: 1 0 auto;
+            z-index: 1;
+        }
+
+        /* ---------- Секции контента (вкладки) ---------- */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(18px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- Основной блок с содержимым ---------- */
+        .main-content {
+            position: relative;
+            background: rgba(255, 235, 240, 0.92);
+            backdrop-filter: blur(6px);
+            border-radius: 40px;
+            padding: 50px 48px 48px;
+            margin: 0 0 20px 0;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+            border: 1px solid rgba(255, 220, 230, 0.5);
+            text-align: center;
+            min-height: 320px;
+        }
+
+        /* ---------- Стили для контента внутри вкладок ---------- */
+        .main-content h1 {
+            font-size: 2.5rem;
+            color: #4a1e2e;
+            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(255, 200, 210, 0.3);
+        }
+        .main-content h2 {
+            font-size: 2.0rem;
+            color: #4a1e2e;
+            margin-bottom: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .main-content p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #3d2a30;
+            max-width: 800px;
+            margin: 0 auto 16px;
+        }
+        .main-content img {
+            max-width: 100%;
+            max-height: 380px;
+            border-radius: 28px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+            margin: 12px 0 20px;
+            border: 3px solid rgba(255, 220, 230, 0.6);
+            object-fit: cover;
+        }
+        .main-content video {
+            max-width: 100%;
+            border-radius: 28px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+            margin: 12px 0 20px;
+            border: 3px solid rgba(255, 220, 230, 0.6);
+        }
+        .main-content em {
+            display: inline-block;
+            font-size: 1.3rem;
+            color: #7a3a52;
+            background: rgba(255, 220, 230, 0.4);
+            padding: 6px 24px;
+            border-radius: 40px;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ---------- СТИЛИ ДЛЯ РЯДА ФОТО НА ГЛАВНОЙ ---------- */
+        .photo-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .photo-row img {
+            width: 30%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 220, 230, 0.6);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ---------- СТИЛИ ДЛЯ ВКЛАДКИ "ЕСЛИ СОСКУЧИШЬСЯ ПО МНЕ" ---------- */
+        .video-with-photos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .video-with-photos .video-wrapper {
+            flex: 0 0 55%;
+            max-width: 600px;
+        }
+        .video-with-photos .video-wrapper video {
+            width: 100%;
+            border-radius: 28px;
+            border: 3px solid rgba(255, 220, 230, 0.6);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+        }
+        .video-with-photos .photo-column {
+            flex: 1 1 20%;
+            min-width: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .video-with-photos .photo-column img {
+            width: 100%;
+            border-radius: 20px;
+            border: 3px solid rgba(255, 220, 230, 0.6);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+            max-height: 180px;
+        }
+
+        /* ---------- Footer ---------- */
+        footer {
+            margin-top: 30px;
+            padding: 18px 30px;
+            background: rgba(255, 240, 245, 0.75);
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #4a1e2e;
+            border: 1px solid rgba(255, 200, 210, 0.5);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* ---------- Адаптивность ---------- */
+        @media (max-width: 900px) {
+            .widget-button {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .widget-button {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+            .main-content {
+                padding: 30px 20px 24px;
+                border-radius: 30px;
+            }
+            .main-content h1 {
+                font-size: 1.8rem;
+            }
+            .main-content h2 {
+                font-size: 1.5rem;
+            }
+            .main-content p {
+                font-size: 1.0rem;
+            }
+            .main-content img {
+                max-height: 220px;
+            }
+            .corner-decoration {
+                width: 50px;
+                height: 50px;
+            }
+            .corner-decoration.top-left {
+                top: 6px;
+                left: 6px;
+            }
+            .corner-decoration.top-right {
+                top: 6px;
+                right: 6px;
+            }
+            .corner-decoration.bottom-left {
+                bottom: 6px;
+                left: 6px;
+            }
+            .corner-decoration.bottom-right {
+                bottom: 6px;
+                right: 6px;
+            }
+            footer {
+                font-size: 1.0rem;
+                padding: 12px 20px;
+            }
+
+            .video-with-photos {
+                flex-direction: column;
+            }
+            .video-with-photos .video-wrapper {
+                flex: 1 1 auto;
+                max-width: 100%;
+                width: 100%;
+            }
+            .video-with-photos .photo-column {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .video-with-photos .photo-column img {
+                width: 45%;
+                max-height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .widget-button {
+                padding: 4px 8px;
+                font-size: 0.65rem;
+                border-radius: 30px;
+            }
+            .main-content {
+                padding: 24px 14px 18px;
+                border-radius: 24px;
+            }
+            .main-content h1 {
+                font-size: 1.4rem;
+            }
+            .main-content h2 {
+                font-size: 1.2rem;
+            }
+            .main-content p {
+                font-size: 0.9rem;
+            }
+            .corner-decoration {
+                width: 35px;
+                height: 35px;
+            }
+            .photo-row img {
+                width: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- --- Угловые украшения --- -->
+    <div class="corner-decoration top-left"></div>
+    <div class="corner-decoration top-right"></div>
+    <div class="corner-decoration bottom-left"></div>
+    <div class="corner-decoration bottom-right"></div>
+
+    <!-- --- Виджеты (кнопки) --- -->
+    <header>
+        <div class="widgets">
+            <button class="widget-button home-btn" onclick="showContent('content0')">🏠 На главную</button>
+            <button class="widget-button" onclick="showContent('content1')">Если соскучишься по мне</button>
+            <button class="widget-button" onclick="showContent('content2')">Твои любимые красивые</button>
+            <button class="widget-button" onclick="showContent('content3')">Если ты вдруг почувствуешь, что с чем-то не справляешься</button>
+            <button class="widget-button" onclick="showContent('content4')">Если вдруг соскучишься по Алексею</button>
+            <button class="widget-button" onclick="showContent('content5')">На случай, если тебе станет грустно</button>
+        </div>
+    </header>
+
+    <!-- --- Контейнер с контентом --- -->
+    <div class="container">
+
+        <!-- ======= ГЛАВНАЯ ВКЛАДКА ======= -->
+        <div id="content0" class="content-section active">
+            <div class="main-content">
+                <div class="photo-row">
+                    <img src="для мамы/мама мент.png" alt="Фото мамы 1" />
+                    <img src="для мамы/мама цветы.png" alt="Фото мамы 2" />
+                    <img src="для мамы/мама шапка.png" alt="Фото мамы 3" />
+                </div>
+                <h1>С Днем Рождения, любимая мамочка! Этот сайт создан и поддерживается исключительно для тебя одной, любимой</h1>
+                <p>
+                    Я хочу пожелать тебе сохранить твой позитивный взгляд на жизнь, и справиться со всем, что падла-жизнь нам преподносит, возвращайся сюда когда только захочешь)
+                </p>
+                <p>
+                    Это только начало, скорее выбирай вкладку которой хочешь насладиться <3
+                </p>
+            </div>
+        </div>
+
+        <!-- ======= ВКЛАДКА 1 (ЕСЛИ СОСКУЧИШЬСЯ ПО МНЕ) ======= -->
+        <div id="content1" class="content-section">
+            <div class="main-content">
+                <h2>Если соскучишься по мне</h2>
+                <p>Смотри скорее, все вокруг – я да ты)) 😊</p>
+
+                <div class="video-with-photos">
+                    <!-- Левая колонка с фото (2 шт.) -->
+                    <div class="photo-column">
+                        <img src="для мамы/2.png" alt="Мы с мамой 1" />
+                        <img src="для мамы/выпуск.png" alt="Мы с мамой 2" />
+                    </div>
+
+                    <!-- Видео по центру -->
+                    <div class="video-wrapper">
+                        <video controls>
+    <source src="для мамы/0820.mp4.mp4" type="video/mp4" />
+    <source src="для мамы/000.webm" type="video/webm" />
+    
+</video>
+                    </div>
+
+                    <!-- Правая колонка с фото (2 шт.) -->
+                    <div class="photo-column">
+                        <img src="для мамы/малой.png" alt="Мы с мамой 3" />
+                        <img src="для мамы/малой побольше.png" alt="Мы с мамой 4" />
+                    </div>
+                </div>
+
+                <p><em>Ты в моём сердце каждую минуту ❤️</em></p>
+            </div>
+        </div>
+
+       <!-- ======= ВКЛАДКА 2: ТВОИ ЛЮБИМЫЕ КРАСИВЫЕ (без CSS) ======= -->
+<div id="content2" class="content-section">
+    <div class="main-content">
+        <h2>Твои любимые красивые</h2>
+        <p>Ты самая красивая, а вот галерея твоих самых любимых ✨</p>
+
+        <!-- Ряд 1 -->
+        <table width="100%" cellpadding="10">
+            <tr>
+                <td align="center" width="50%">
+                    <img src="для мамы/бигбой.png" alt="Бигбой" width="90%" />
+                </td>
+                <td align="center" width="50%">
+                    <img src="для мамы/мама алексей.png" alt="Мама и Алексей" width="90%" />
+                </td>
+            </tr>
+            <!-- Ряд 2 -->
+            <tr>
+                <td align="center" width="50%">
+                    <img src="для мамы/ишак.png" alt="Ишак" width="90%" />
+                </td>
+                <td align="center" width="50%">
+                    <img src="для мамы/мелочь.png" alt="Мелочь" width="90%" />
+                </td>
+            </tr>
+        </table>
+
+        <p><em>Твоя красота — это свет, который согревает всех нас ✨</em></p>
+    </div>
+</div>
+
+        <!-- ======= ВКЛАДКА 3: ЕСЛИ НЕ СПРАВЛЯЕШЬСЯ (без CSS) ======= -->
+<div id="content3" class="content-section">
+    <div class="main-content">
+        <h2>Вообще то, моя мама всегда со всем справлялась!</h2>
+        <p>ДА,и между прочим чего только ты не умеешь!</p>
+
+        <!-- Таблица 2×3 с разными размерами -->
+        <table width="100%" cellpadding="8" cellspacing="0" border="0">
+            <tr>
+                <!-- Ряд 1: "блины" (широкий) + "волк" + "кот" -->
+                <td width="40%" align="center" valign="middle">
+                    <img src="для мамы/блины.png" alt="Блины" width="100%" />
+                </td>
+                <td width="30%" align="center" valign="middle">
+                    <img src="для мамы/волк.png" alt="Волк" width="100%" />
+                </td>
+                <td width="30%" align="center" valign="middle">
+                    <img src="для мамы/кот.png" alt="Кот" width="100%" />
+                </td>
+            </tr>
+            <tr>
+                <!-- Ряд 2: "сварка" + "плот" (широкий) + "танк" -->
+                <td width="30%" align="center" valign="middle">
+                    <img src="для мамы/сварка.png" alt="Сварка" width="100%" />
+                </td>
+                <td width="40%" align="center" valign="middle">
+                    <img src="для мамы/плот.png" alt="Плот" width="100%" />
+                </td>
+                <td width="30%" align="center" valign="middle">
+                    <img src="для мамы/танк.png" alt="Танк" width="100%" />
+                </td>
+            </tr>
+        </table>
+
+        <p><em>«Ты можешь все, помни об этом <3»</em></p>
+    </div>
+</div>
+      
+        <!-- ======= ВКЛАДКА 5: ЕСЛИ ЗАГРУСТИТ (без CSS) ======= -->
+<div id="content5" class="content-section">
+    <div class="main-content">
+        <h2>На случай, если тебе станет грустно</h2>
+        <p>Просто напомню, какой я знаю свою маму</p>
+
+        <!-- Круглая экспозиция через таблицу -->
+        <table width="100%" cellpadding="6" cellspacing="0" border="0" align="center">
+            <!-- Ряд 1: улыбка (в центре сверху) -->
+            <tr>
+                <td width="20%"></td>
+                <td width="20%"></td>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/улыбка.png" alt="Улыбка" width="100%" />
+                </td>
+                <td width="20%"></td>
+                <td width="20%"></td>
+            </tr>
+            <!-- Ряд 2: пожар (слева) + пусто + казань (справа) -->
+            <tr>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/пожар.png" alt="Пожар" width="100%" />
+                </td>
+               <td width="20%" align="center" valign="middle">
+    <p align="center">
+        <em>моя любимая мама<br />всегда улыбается ❤️</em>
+    </p>
+</td>
+                <td width="20%"></td>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/казань.png" alt="Казань" width="100%" />
+                </td>
+            </tr>
+            <!-- Ряд 3: шарики (слева) + кузя (справа) -->
+            <tr>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/шарики.png" alt="Шарики" width="100%" />
+                </td>
+                <td width="20%"></td>
+                <td width="20%"></td>
+                <td width="20%"></td>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/кузя.png" alt="Кузя" width="100%" />
+                </td>
+            </tr>
+            <!-- Ряд 4: самокат (слева) + пробка (справа) -->
+            <tr>
+                <td width="20%"></td>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/самокат.png" alt="Самокат" width="100%" />
+                </td>
+                <td width="20%"></td>
+                <td width="20%" align="center" valign="middle">
+                    <img src="для мамы/пробка.png" alt="Пробка" width="100%" />
+                </td>
+                <td width="20%"></td>
+            </tr>
+        </table>
+
+        <p><em>Улыбнись, ведь ты — самая яркая звезда на небе 🌟</em></p>
+    </div>
+</div>
+
+    </div>
+
+    <!-- --- Footer --- -->
+    <footer>
+        С любовью, твой сын!
+    </footer>
+
+    <!-- --- JavaScript --- -->
+    <script>
+        function showContent(contentId) {
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+            const selectedContent = document.getElementById(contentId);
+            if (selectedContent) {
+                selectedContent.classList.add('active');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            showContent('content0');
+        });
+    </script>
+
+</body>
+</html>
