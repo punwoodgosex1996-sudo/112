@@ -24,7 +24,7 @@
             justify-content: flex-start;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fce4ec;
-            background-image: url('для мамы/лилия фон главной страницы.png');
+            background-image: url('dlya_mamy/лилия фон главной страницы.png');
             background-repeat: no-repeat;
             background-position: center center;
             background-attachment: fixed;
@@ -33,7 +33,7 @@
             position: relative;
         }
 
-        /* ===== ШИРМА-ЗАСТАВКА (работает 100%) ===== */
+        /* ===== ШИРМА-ЗАСТАВКА (JavaScript) ===== */
         #splash {
             position: fixed;
             top: 0;
@@ -45,16 +45,7 @@
             justify-content: center;
             align-items: center;
             z-index: 99999;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        /* Когда в URL появляется #open — ширма исчезает */
-        #splash:target {
-            opacity: 0;
-            transform: scale(1.1);
-            pointer-events: none;
+            transition: opacity 0.6s ease;
         }
 
         .splash-box {
@@ -85,7 +76,6 @@
         }
 
         .splash-btn {
-            display: inline-block;
             background: #b57a8f;
             color: #fff;
             border: none;
@@ -96,7 +86,6 @@
             cursor: pointer;
             transition: 0.3s;
             box-shadow: 0 8px 25px rgba(181, 122, 143, 0.4);
-            text-decoration: none;
         }
 
         .splash-btn:hover {
@@ -115,7 +104,7 @@
             position: fixed;
             width: 80px;
             height: 80px;
-            background: url('для мамы/края.png') no-repeat center center;
+            background: url('dlya_mamy/края.png') no-repeat center center;
             background-size: contain;
             pointer-events: none;
             z-index: 999;
@@ -140,7 +129,7 @@
             transform: scale(-1, -1);
         }
 
-        /* ---------- Виджеты (кнопки) ---------- */
+        /* ---------- Виджеты ---------- */
         .widgets {
             display: flex;
             flex-wrap: nowrap;
@@ -191,7 +180,7 @@
             border-color: #5a2d3c;
         }
 
-        /* ---------- Контейнер контента ---------- */
+        /* ---------- Контейнер ---------- */
         .container {
             width: 100%;
             max-width: 1100px;
@@ -200,7 +189,6 @@
             z-index: 1;
         }
 
-        /* ---------- Секции контента ---------- */
         .content-section {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -227,7 +215,6 @@
             min-height: 320px;
         }
 
-        /* ---------- Стили для контента ---------- */
         .main-content h1 {
             font-size: 2.5rem;
             color: #4a1e2e;
@@ -277,7 +264,7 @@
             font-style: italic;
         }
 
-        /* ---------- СТИЛИ ДЛЯ РЯДА ФОТО НА ГЛАВНОЙ ---------- */
+        /* ---------- Стили для ряда фото на главной ---------- */
         .photo-row {
             display: flex;
             justify-content: center;
@@ -295,7 +282,7 @@
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
         }
 
-        /* ---------- СТИЛИ ДЛЯ ВКЛАДКИ "ЕСЛИ СОСКУЧИШЬСЯ ПО МНЕ" ---------- */
+        /* ---------- Стили для вкладки "Если соскучишься по мне" ---------- */
         .video-with-photos {
             display: flex;
             align-items: center;
@@ -454,17 +441,17 @@
 </head>
 <body>
 
-    <!-- ===== ШИРМА-ЗАСТАВКА (работает через #open) ===== -->
+    <!-- ===== ШИРМА-ЗАСТАВКА (JavaScript) ===== -->
     <div id="splash">
         <div class="splash-box">
             <h1>❤️</h1>
             <h2>Этот сайт создан с любовью</h2>
             <p>для самой лучшей мамы на свете</p>
-            <a href="#open" class="splash-btn">Открыть 🎁</a>
+            <button class="splash-btn" onclick="document.getElementById('splash').style.display='none'">
+                Открыть 🎁
+            </button>
         </div>
     </div>
-</body>
-    
 
     <!-- --- Угловые украшения --- -->
     <div class="corner-decoration top-left"></div>
@@ -491,9 +478,9 @@
         <div id="content0" class="content-section active">
             <div class="main-content">
                 <div class="photo-row">
-                    <img src="для мамы/мама мент.png" alt="Фото мамы 1" />
-                    <img src="для мамы/мама цветы.png" alt="Фото мамы 2" />
-                    <img src="для мамы/мама шапка.png" alt="Фото мамы 3" />
+                    <img src="dlya_mamy/мама мент.png" alt="Фото мамы 1" />
+                    <img src="dlya_mamy/мама цветы.png" alt="Фото мамы 2" />
+                    <img src="dlya_mamy/мама шапка.png" alt="Фото мамы 3" />
                 </div>
                 <h1>С Днем Рождения, любимая мамочка! Этот сайт создан и поддерживается исключительно для тебя одной, любимой</h1>
                 <p>
@@ -513,20 +500,21 @@
 
                 <div class="video-with-photos">
                     <div class="photo-column">
-                        <img src="для мамы/2.png" alt="Мы с мамой 1" />
-                        <img src="для мамы/выпуск.png" alt="Мы с мамой 2" />
+                        <img src="dlya_mamy/2.png" alt="Мы с мамой 1" />
+                        <img src="dlya_mamy/выпуск.png" alt="Мы с мамой 2" />
                     </div>
                     <div class="video-wrapper">
                         <video controls>
-                            <source src="для мамы/0820.mp4.mp4" type="video/mp4" />
-                            <source src="для мамы/000.webm" type="video/webm" />
+                            <source src="dlya_mamy/0820.mp4.mp4" type="video/mp4" />
+                            <source src="dlya_mamy/000.webm" type="video/webm" />
                         </video>
                     </div>
                     <div class="photo-column">
-                        <img src="для мамы/малой.png" alt="Мы с мамой 3" />
-                        <img src="для мамы/малой побольше.png" alt="Мы с мамой 4" />
+                        <img src="dlya_mamy/малой.png" alt="Мы с мамой 3" />
+                        <img src="dlya_mamy/малой побольше.png" alt="Мы с мамой 4" />
                     </div>
                 </div>
+
                 <p><em>Ты в моём сердце каждую минуту ❤️</em></p>
             </div>
         </div>
@@ -536,24 +524,26 @@
             <div class="main-content">
                 <h2>Твои любимые красивые</h2>
                 <p>Ты самая красивая, а вот галерея твоих самых любимых ✨</p>
+
                 <table width="100%" cellpadding="10">
                     <tr>
                         <td align="center" width="50%">
-                            <img src="для мамы/бигбой.png" alt="Бигбой" width="90%" />
+                            <img src="dlya_mamy/бигбой.png" alt="Бигбой" width="90%" />
                         </td>
                         <td align="center" width="50%">
-                            <img src="для мамы/мама алексей.png" alt="Мама и Алексей" width="90%" />
+                            <img src="dlya_mamy/мама алексей.png" alt="Мама и Алексей" width="90%" />
                         </td>
                     </tr>
                     <tr>
                         <td align="center" width="50%">
-                            <img src="для мамы/ишак.png" alt="Ишак" width="90%" />
+                            <img src="dlya_mamy/ишак.png" alt="Ишак" width="90%" />
                         </td>
                         <td align="center" width="50%">
-                            <img src="для мамы/мелочь.png" alt="Мелочь" width="90%" />
+                            <img src="dlya_mamy/мелочь.png" alt="Мелочь" width="90%" />
                         </td>
                     </tr>
                 </table>
+
                 <p><em>Твоя красота — это свет, который согревает всех нас ✨</em></p>
             </div>
         </div>
@@ -563,54 +553,64 @@
             <div class="main-content">
                 <h2>Вообще то, моя мама всегда со всем справлялась!</h2>
                 <p>ДА,и между прочим чего только ты не умеешь!</p>
+
                 <table width="100%" cellpadding="8" cellspacing="0" border="0">
                     <tr>
                         <td width="40%" align="center" valign="middle">
-                            <img src="для мамы/блины.png" alt="Блины" width="100%" />
+                            <img src="dlya_mamy/блины.png" alt="Блины" width="100%" />
                         </td>
                         <td width="30%" align="center" valign="middle">
-                            <img src="для мамы/волк.png" alt="Волк" width="100%" />
+                            <img src="dlya_mamy/волк.png" alt="Волк" width="100%" />
                         </td>
                         <td width="30%" align="center" valign="middle">
-                            <img src="для мамы/кот.png" alt="Кот" width="100%" />
+                            <img src="dlya_mamy/кот.png" alt="Кот" width="100%" />
                         </td>
                     </tr>
                     <tr>
                         <td width="30%" align="center" valign="middle">
-                            <img src="для мамы/сварка.png" alt="Сварка" width="100%" />
+                            <img src="dlya_mamy/сварка.png" alt="Сварка" width="100%" />
                         </td>
                         <td width="40%" align="center" valign="middle">
-                            <img src="для мамы/плот.png" alt="Плот" width="100%" />
+                            <img src="dlya_mamy/плот.png" alt="Плот" width="100%" />
                         </td>
                         <td width="30%" align="center" valign="middle">
-                            <img src="для мамы/танк.png" alt="Танк" width="100%" />
+                            <img src="dlya_mamy/танк.png" alt="Танк" width="100%" />
                         </td>
                     </tr>
                 </table>
+
                 <p><em>«Ты можешь все, помни об этом <3»</em></p>
             </div>
         </div>
 
-       
+        <!-- ======= ВКЛАДКА 4: АЛЕКСЕЙ (пока пустая) ======= -->
+        <div id="content4" class="content-section">
+            <div class="main-content">
+                <h2>Если вдруг соскучишься по Алексею</h2>
+                <p>Он очень тебя любит! Скоро здесь появится видео от него 🥰</p>
+                <p><em>Самые тёплые моменты с Алексеем 🥰</em></p>
+            </div>
+        </div>
 
-        <!-- ======= ВКЛАДКА 4: ЕСЛИ ЗАГРУСТИТ ======= -->
+        <!-- ======= ВКЛАДКА 5: ЕСЛИ ЗАГРУСТИТ ======= -->
         <div id="content5" class="content-section">
             <div class="main-content">
                 <h2>На случай, если тебе станет грустно</h2>
                 <p>Просто напомню, какой я знаю свою маму</p>
+
                 <table width="100%" cellpadding="6" cellspacing="0" border="0" align="center">
                     <tr>
                         <td width="20%"></td>
                         <td width="20%"></td>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/улыбка.png" alt="Улыбка" width="100%" />
+                            <img src="dlya_mamy/улыбка.png" alt="Улыбка" width="100%" />
                         </td>
                         <td width="20%"></td>
                         <td width="20%"></td>
                     </tr>
                     <tr>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/пожар.png" alt="Пожар" width="100%" />
+                            <img src="dlya_mamy/пожар.png" alt="Пожар" width="100%" />
                         </td>
                         <td width="20%" align="center" valign="middle">
                             <p align="center">
@@ -619,32 +619,33 @@
                         </td>
                         <td width="20%"></td>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/казань.png" alt="Казань" width="100%" />
+                            <img src="dlya_mamy/казань.png" alt="Казань" width="100%" />
                         </td>
                     </tr>
                     <tr>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/шарики.png" alt="Шарики" width="100%" />
+                            <img src="dlya_mamy/шарики.png" alt="Шарики" width="100%" />
                         </td>
                         <td width="20%"></td>
                         <td width="20%"></td>
                         <td width="20%"></td>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/кузя.png" alt="Кузя" width="100%" />
+                            <img src="dlya_mamy/кузя.png" alt="Кузя" width="100%" />
                         </td>
                     </tr>
                     <tr>
                         <td width="20%"></td>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/самокат.png" alt="Самокат" width="100%" />
+                            <img src="dlya_mamy/самокат.png" alt="Самокат" width="100%" />
                         </td>
                         <td width="20%"></td>
                         <td width="20%" align="center" valign="middle">
-                            <img src="для мамы/пробка.png" alt="Пробка" width="100%" />
+                            <img src="dlya_mamy/пробка.png" alt="Пробка" width="100%" />
                         </td>
                         <td width="20%"></td>
                     </tr>
                 </table>
+
                 <p><em>Улыбнись, ведь ты — самая яркая звезда на небе 🌟</em></p>
             </div>
         </div>
